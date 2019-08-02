@@ -1,0 +1,51 @@
+---
+title: "Markdown exacerbations.ggplot"
+author: "Aida"
+date: "05/07/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Loading data
+```{r}
+library(haven)
+exacevents_wide<-read_sas("E:/ForAida/exacevents_wide.sas7bdat")
+library(ggplot2)
+library(ggthemes)
+```
+
+Here's is ggplots of the data
+
+```{r fig.width=4, fig.height=2, echo=TRUE}
+#Decreasing the size of axis labels
+par(cex.lab=0.5)
+
+###Plotting sevExacNum against age, BMI, fev1pp, sgrq
+ggplot(data=exacevents_wide, mapping=aes(x=age,y=sevExacNum))+geom_point(position="jitter")+ labs(x = "Age", y = "Number of Severe Exacerbations")+theme_economist()
+ggplot(data=exacevents_wide, mapping=aes(x=BMI,y=sevExacNum))+geom_point(position="jitter")+ labs(x = "BMI", y = "Number of Severe Exacerbations") + theme_tufte()
+ggplot(data=exacevents_wide, mapping=aes(x=fev1pp,y=sevExacNum))+geom_point(position="jitter")+ labs(x = "FEV1%", y = "Number of Severe Exacerbations")+theme_solarized()
+ggplot(data=exacevents_wide, mapping=aes(x=sgrq,y=sevExacNum))+geom_point(position="jitter")+ labs(x = "SGRQ Score", y = "Number of Severe Exacerbations")
+
+###Plotting sevExacNum against Xs, Normalized on days of study
+ggplot(data=exacevents_wide, mapping=aes(x=age, BMI,y=sevExacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "Age", y = "Number of Severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=BMI,y=sevExacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "BMI", y = "Number of Severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=fev1pp,y=sevExacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "FEV1%", y = "Number of Severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=sgrq,y=sevExacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "SGRQ Score", y = "Number of Severe Exacerbations")
+
+###Plotting ExacNum against age, BMI, fev1pp, sgrq
+ggplot(data=exacevents_wide, mapping=aes(x=age,y=exacNum))+geom_point(position="jitter")+ labs(x = "Age", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=BMI,y=exacNum))+geom_point(position="jitter")+ labs(x = "BMI", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=fev1pp,y=exacNum))+geom_point(position="jitter")+ labs(x = "FEV1%", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=sgrq,y=exacNum))+geom_point(position="jitter")+ labs(x = "SGRQ Score", y = "Number of Non-severe Exacerbations")
+
+###Plotting ExacNum against age, BMI, fev1pp, sgrq, Normamized on days of study
+ggplot(data=exacevents_wide, mapping=aes(x=age,y=exacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "Age", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=BMI,y=exacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "BMI", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=fev1pp,y=exacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "FEV1%", y = "Number of Non-severe Exacerbations")
+ggplot(data=exacevents_wide, mapping=aes(x=sgrq,y=exacNum/Days_In_Study*365.25))+geom_point(position="jitter")+ labs(x = "SGRQ Score", y = "Number of Non-severe Exacerbations")
+
+```
+
+
+
